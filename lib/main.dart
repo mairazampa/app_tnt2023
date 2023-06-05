@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Flutter Demo',
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: Container(
+            color: const Color.fromRGBO(254, 254, 254, 1),
+            padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text("Inicio",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(48, 52, 55, 1))),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text("Resumen",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(64, 68, 70, 1))),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(18),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                                color: Color.fromRGBO(0, 0, 0, 0.5),
+                                blurRadius: 40,
+                                offset: Offset(4, 6))
+                          ]),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                                color: const Color.fromRGBO(242, 248, 255, 1),
+                                borderRadius: BorderRadius.circular(50)),
+                            child: const Icon(Icons.chat_bubble,
+                                size: 15,
+                                color: Color.fromRGBO(0, 112, 240, 1)),
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          const Text("3.950",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color.fromRGBO(48, 52, 55, 1))),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          const Text("Rtas gen.",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromRGBO(114, 119, 122, 1))),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 33,
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(255, 249, 240, 1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: const [
+                          Text("canal de Texto"),
+                          Text("Chatea con IA")
+                        ],
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: const Text("CheaA"),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )));
+  }
+}
