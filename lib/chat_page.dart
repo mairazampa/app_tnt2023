@@ -1,15 +1,23 @@
-import 'package:app_demo/home_banner_rectangle.dart';
 import 'package:flutter/material.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  List<String> messages = [];
+
+  @override
   Widget build(BuildContext context) {
+    TextEditingController textFieldController = TextEditingController();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("Chat Page"),
-          backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
+          backgroundColor: const Color.fromRGBO(0, 0, 0, 0.5),
         ),
         body: Container(
             color: const Color.fromRGBO(254, 254, 254, 1),
@@ -22,16 +30,23 @@ class ChatPage extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
                         color: Color.fromRGBO(48, 52, 55, 1))),
-                const SizedBox(
-                  height: 16,
+                TextField(
+                  controller: textFieldController,
+                  onSubmitted: (value) {
+                    setState(() {
+                      messages.add(value);
+                    });
+                    textFieldController.clear();
+                  },
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'escribe un mensaje...',
+                  ),
                 ),
-                const Text("Resumen",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(64, 68, 70, 1))),
-                const SizedBox(
-                  height: 16,
+                Expanded(
+                  child: ListView(
+                    children: messages.map((e) => Text(e)).toList(),
+                  ),
                 )
               ],
             )));
