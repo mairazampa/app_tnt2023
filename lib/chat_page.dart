@@ -1,3 +1,5 @@
+import 'package:app_demo/widgets/ai_text_message.dart';
+import 'package:app_demo/widgets/user_text_message.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatefulWidget {
@@ -8,12 +10,25 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<String> messages = [];
+  List<TextMessage> messages = [];
+
+  TextEditingController textFieldController = TextEditingController();
+
+  void sendUserMsgToAI(userMessage) {
+    setState(() {
+      messages.add(TextMessage(userMessage, false));
+    });
+  }
+
+  void addUserMessage(String message) {
+    setState(() {
+      messages.add(TextMessage(message, true));
+    });
+    sendUserMsgToAI(message);
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textFieldController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -70,46 +85,56 @@ class _ChatPageState extends State<ChatPage> {
             children: [
               Expanded(
                 child: ListView(
-                  children: messages.map((message) => Text(message)).toList(),
+                  children: messages
+                      .map((txtMsg) => txtMsg.isUser
+                          ? UserTextMessage(message: txtMsg.text)
+                          : AiTextMessage(message: txtMsg.text))
+                      .toList(),
                 ),
               ),
-              Row(children: [
-                Expanded(
-                  child: TextField(
-                    controller: textFieldController,
-                    onSubmitted: (value) {
-                      setState(() {
-                        messages.add(value);
-                      });
-                      textFieldController.clear();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      labelText: 'escribe un mensaje...',
-                    ),
-                  ),
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 8),
-                    decoration: BoxDecoration(
-                        color: const Color.fromRGBO(48, 52, 55, 1),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          messages.add(textFieldController.text);
-                        });
+              Container(
+                padding: const EdgeInsets.only(top: 12),
+                child: Row(children: [
+                  Expanded(
+                    child: TextField(
+                      controller: textFieldController,
+                      onSubmitted: (value) {
+                        addUserMessage(value);
                         textFieldController.clear();
                       },
-                      icon: const Icon(Icons.send),
-                      color: Colors.white,
-                    ))
-              ]),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        labelText: 'escribe un mensaje...',
+                      ),
+                    ),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(left: 8),
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(48, 52, 55, 1),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: IconButton(
+                        onPressed: () {
+                          addUserMessage(textFieldController.text);
+                          textFieldController.clear();
+                        },
+                        icon: const Icon(Icons.send),
+                        color: Colors.white,
+                      ))
+                ]),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+}
+
+class TextMessage {
+  final String text;
+  final bool isUser;
+
+  TextMessage(this.text, this.isUser);
 }
