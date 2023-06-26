@@ -1,3 +1,6 @@
+import 'package:app_demo/data/ia_response.dart';
+import 'package:app_demo/services/analytics_service.dart';
+import 'package:app_demo/services/ia_service.dart';
 import 'package:app_demo/widgets/ai_text_message.dart';
 import 'package:app_demo/widgets/user_text_message.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +17,22 @@ class _ChatPageState extends State<ChatPage> {
 
   TextEditingController textFieldController = TextEditingController();
 
-  void sendUserMsgToAI(userMessage) {
+  ScaffoldMessengerState? scaffoldMsgState;
+
+  void sendUserMsgToAI(userMessage) async {
+    IaResponse chatBotRes = await sendQuestionToChatbot(userMessage);
+
+    if (chatBotRes.error && scaffoldMsgState != null) {
+      scaffoldMsgState?.showSnackBar(SnackBar(
+        content: const Text("Error al enviar el mensaje"),
+        backgroundColor: Colors.red.shade400,
+      ));
+    } else {
+      incrementTextResponsesCount();
+    }
+
     setState(() {
-      messages.add(TextMessage(userMessage, false));
+      messages.add(TextMessage(chatBotRes.mensaje, false));
     });
   }
 
@@ -29,6 +45,8 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    scaffoldMsgState = ScaffoldMessenger.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Row(

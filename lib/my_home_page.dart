@@ -1,14 +1,30 @@
 import 'package:app_demo/home_banner_rectangle.dart';
+import 'package:app_demo/services/analytics_service.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int textResponsesCount = 0;
 
   @override
   Widget build(BuildContext context) {
     void goToImagePage() {
       Navigator.pushNamed(context, '/image');
     }
+
+    getTextResponsesCount().then((value) {
+      if (value != textResponsesCount) {
+        setState(() {
+          textResponsesCount = value;
+        });
+      }
+    });
 
     return Scaffold(
         body: Container(
@@ -62,8 +78,8 @@ class MyHomePage extends StatelessWidget {
                           const SizedBox(
                             height: 12,
                           ),
-                          const Text("3.950",
-                              style: TextStyle(
+                          Text(textResponsesCount.toString(),
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromRGBO(48, 52, 55, 1))),
