@@ -1,11 +1,7 @@
 import 'package:app_demo/data/ia_response.dart';
 import 'package:app_demo/services/analytics_service.dart';
 import 'package:app_demo/services/ia_service.dart';
-<<<<<<< HEAD
 import 'package:app_demo/widgets/ia_text_message.dart';
-=======
-import 'package:app_demo/widgets/ai_text_message.dart';
->>>>>>> 56bb76930862e5edc4cf82f1656fd8acd69fa6cc
 import 'package:app_demo/widgets/user_text_message.dart';
 import 'package:flutter/material.dart';
 
@@ -159,8 +155,4 @@ class TextMessage {
   final bool isUser;
 
   TextMessage(this.text, this.isUser);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 56bb76930862e5edc4cf82f1656fd8acd69fa6cc

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:camera/camera.dart';
+import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
@@ -17,7 +17,6 @@ class _ImageState extends State<ImagePage> {
    
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
      return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -56,30 +55,6 @@ class _ImageState extends State<ImagePage> {
                           fontSize: 14),
                     ),
                   ],
-=======
-    return Scaffold(
-        body: Container(
-            color: const Color.fromRGBO(254, 254, 254, 1),
-            padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("IMAGE IMAGE IMAGE",
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(48, 52, 55, 1))),
-                SizedBox(
-                  height: 16,
-                ),
-                Text("Resumen",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: Color.fromRGBO(64, 68, 70, 1))),
-                SizedBox(
-                  height: 16,
->>>>>>> 56bb76930862e5edc4cf82f1656fd8acd69fa6cc
                 )
               ],
             ),

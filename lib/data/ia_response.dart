@@ -23,8 +23,4 @@ class IaResponse {
         "mensaje": mensaje,
         "error": error,
       };
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 56bb76930862e5edc4cf82f1656fd8acd69fa6cc
