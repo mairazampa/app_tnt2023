@@ -11,4 +11,8 @@ void incrementTextResponsesCount() async {
   int prevVal = await getTextResponsesCount();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setInt(_kTextResponsesCount, prevVal + 1);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 56bb76930862e5edc4cf82f1656fd8acd69fa6cc
