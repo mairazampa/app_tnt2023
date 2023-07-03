@@ -2,8 +2,10 @@ import 'package:app_demo/chat_page.dart';
 import 'package:app_demo/image_page.dart';
 import 'package:app_demo/my_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 
-void main() {
+void main()  {
+  
   runApp(const MyApp());
 }
 

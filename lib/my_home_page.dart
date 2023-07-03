@@ -1,39 +1,32 @@
 import 'package:app_demo/home_banner_rectangle.dart';
+import 'package:app_demo/services/analytics_service.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int textResponsesCount = 0;
+
+  @override
   Widget build(BuildContext context) {
-    goToImagePage() {
+    void goToImagePage() {
       Navigator.pushNamed(context, '/image');
     }
 
+    getTextResponsesCount().then((value) {
+      if (value != textResponsesCount) {
+        setState(() {
+          textResponsesCount = value;
+        });
+      }
+    });
+
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
-        ),
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        floatingActionButton: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-              color: const Color.fromRGBO(0, 112, 240, 1),
-              borderRadius: BorderRadius.circular(50)),
-          child: const Icon(Icons.add, size: 30, color: Colors.white),
-        ),
-        drawer:
-            Container(height: double.infinity, width: 280, color: Colors.red),
-        bottomNavigationBar: Container(
-          color: Color.fromRGBO(0, 0, 0, 0.5),
-          height: 100,
-        ),
-        bottomSheet: Container(
-          color: Color.fromRGBO(0, 0, 0, 0.1),
-          height: 100,
-        ),
         body: Container(
             color: const Color.fromRGBO(254, 254, 254, 1),
             padding: const EdgeInsets.only(top: 60, left: 24, right: 24),
@@ -85,8 +78,8 @@ class MyHomePage extends StatelessWidget {
                           const SizedBox(
                             height: 12,
                           ),
-                          const Text("3.950",
-                              style: TextStyle(
+                          Text(textResponsesCount.toString(),
+                              style: const TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromRGBO(48, 52, 55, 1))),
@@ -128,30 +121,6 @@ class MyHomePage extends StatelessWidget {
                     subtitle: "Imágenes desde imágenes",
                     badgeText: "CREÁ",
                   ),
-                ),
-                const HomeBannerRectangle(
-                  backgroundColor: Color.fromRGBO(240, 240, 255, 1),
-                  title: "Canal de imagen",
-                  subtitle: "Imágenes desde imágenes",
-                  badgeText: "CREÁ",
-                ),
-                const HomeBannerRectangle(
-                  backgroundColor: Color.fromRGBO(240, 240, 255, 1),
-                  title: "Canal de imagen",
-                  subtitle: "Imágenes desde imágenes",
-                  badgeText: "CREÁ",
-                ),
-                const HomeBannerRectangle(
-                  backgroundColor: Color.fromRGBO(240, 240, 255, 1),
-                  title: "Canal de imagen",
-                  subtitle: "Imágenes desde imágenes",
-                  badgeText: "CREÁ",
-                ),
-                const HomeBannerRectangle(
-                  backgroundColor: Color.fromRGBO(240, 240, 255, 1),
-                  title: "Canal de imagen",
-                  subtitle: "Imágenes desde imágenes",
-                  badgeText: "CREÁ",
                 ),
               ],
             )));
